@@ -1,9 +1,9 @@
-import { Controller, Get, Param, Delete, Post, Body } from '@nestjs/common';
-import { SampleService } from './sample.service';
-import { SampleEntity } from '../database/entities/sample.entity';
-import { SampleDto } from './sample.dto';
+import { Controller, Get, Param, Delete, Post, Body } from "@nestjs/common";
+import { SampleService } from "./sample.service";
+import { SampleEntity } from "../database/entities/sample.entity";
+import { SampleDto } from "./sample.dto";
 
-@Controller('samples')
+@Controller("samples")
 export class SampleController {
 
   constructor(private readonly sampleService: SampleService) {
@@ -17,7 +17,7 @@ export class SampleController {
     return this.sampleService.saveSample(sample);
   }
 
-  @Delete(':sampleName') deleteSample(@Param('sampleName') sampleName: string) {
+  @Delete(":sampleName") deleteSample(@Param("sampleName") sampleName: string) {
     return this.sampleService.deleteSample(sampleName);
   }
 }

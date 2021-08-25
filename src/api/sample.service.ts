@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InMemoryDatabaseService } from '../database/in-memory-database.service';
-import { SampleEntity } from '../database/entities/sample.entity';
+import { Injectable } from "@nestjs/common";
+import { InMemoryDatabaseService } from "../database/in-memory-database.service";
+import { SampleEntity } from "../database/entities/sample.entity";
+import { Deprecated } from "../decorators/deprecated.decorator";
 
 @Injectable()
 export class SampleService {
@@ -16,7 +17,7 @@ export class SampleService {
     return this.database.saveSample(sample);
   }
 
-  deleteSample(sampleName: string) {
+  @Deprecated() deleteSample(sampleName: string) {
     return this.database.deleteSample(sampleName);
   }
 
