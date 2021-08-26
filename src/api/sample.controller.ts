@@ -1,10 +1,11 @@
-import { Controller, Get, Param, Delete, Post, Body, Query, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, Param, Delete, Post, Body, Query, UseInterceptors, UseGuards } from "@nestjs/common";
 import { SampleService } from "./sample.service";
 import { SampleEntity } from "../database/entities/sample.entity";
 import { SampleDto } from "./sample.dto";
 import { QueryParamsValidationPipe } from "../pipes/query-params-validation.pipe";
 import { SampleQuery } from "./sample.query";
 import { SampleInterceptor } from "../interceptors/sample.interceptor";
+import { SampleGuard } from "../guards/sample.guard";
 
 @UseInterceptors(SampleInterceptor)
 @Controller("samples")
@@ -18,6 +19,7 @@ export class SampleController {
     return this.sampleService.getSamples();
   }
 
+  @UseGuards(SampleGuard)
   @Post() saveSample(@Body() sample: SampleDto): SampleEntity {
     return this.sampleService.saveSample(sample);
   }
