@@ -1,7 +1,9 @@
-import { Controller, Get, Param, Delete, Post, Body } from "@nestjs/common";
+import { Controller, Get, Param, Delete, Post, Body, Query } from "@nestjs/common";
 import { SampleService } from "./sample.service";
 import { SampleEntity } from "../database/entities/sample.entity";
 import { SampleDto } from "./sample.dto";
+import { QueryParamsValidationPipe } from "../pipes/query-params-validation.pipe";
+import { SampleQuery } from "./sample.query";
 
 @Controller("samples")
 export class SampleController {
@@ -9,7 +11,8 @@ export class SampleController {
   constructor(private readonly sampleService: SampleService) {
   }
 
-  @Get() getSamples(): SampleEntity[] {
+// Pipe applies for @Param, @Body and @Query
+  @Get() getSamples(@Query(QueryParamsValidationPipe) query: SampleQuery): SampleEntity[] {
     return this.sampleService.getSamples();
   }
 
