@@ -1,10 +1,12 @@
-import { Controller, Get, Param, Delete, Post, Body, Query } from "@nestjs/common";
+import { Controller, Get, Param, Delete, Post, Body, Query, UseInterceptors } from "@nestjs/common";
 import { SampleService } from "./sample.service";
 import { SampleEntity } from "../database/entities/sample.entity";
 import { SampleDto } from "./sample.dto";
 import { QueryParamsValidationPipe } from "../pipes/query-params-validation.pipe";
 import { SampleQuery } from "./sample.query";
+import { SampleInterceptor } from "../interceptors/sample.interceptor";
 
+@UseInterceptors(SampleInterceptor)
 @Controller("samples")
 export class SampleController {
 
